@@ -32,7 +32,7 @@ export default defineComponent({
       try {
         const response = await axios.post('/users', this.user)
         alert('Пользователь создан: ' + response.data.id)
-      } catch (error) {
+      } catch (error: any) {
         alert('Ошибка при создании пользователя: ' + error.message)
       }
     }
