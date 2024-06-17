@@ -1,0 +1,20 @@
+.user-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.user-item {
+  margin: 10px 0;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.user-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.user-link:hover {
+  text-decoration: underline;
+}
