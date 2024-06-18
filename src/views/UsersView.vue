@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1>Список пользователей</h1>
-    <ul class="user-list">
-      <li v-for="user in users" :key="user.id" class="user-item">
-        <router-link :to="'/user/' + user.id" class="user-link">{{ user.name }}</router-link>
+    <ul :class="style['user-list']">
+      <li v-for="user in users" :key="user.id" :class="style['user-item']">
+        <router-link :to="'/user/' + user.id" :class="style['user-link']">{{ user.name }}</router-link>
       </li>
     </ul>
   </div>
@@ -13,11 +13,17 @@
 import axios from '@/axios'
 import { defineComponent } from 'vue'
 import { User } from '@/types'
+import style from '@/styles/users.module.scss'
 
 export default defineComponent({
   data (): { users: User[] } {
     return {
       users: []
+    }
+  },
+  computed: {
+    style () {
+      return style
     }
   },
   async mounted () {
@@ -26,7 +32,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-@import '@/styles/users.scss';
-</style>
