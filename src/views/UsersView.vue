@@ -1,34 +1,39 @@
 <template>
   <div>
     <h1>Список пользователей</h1>
-    <ul :class="style['user-list']">
-      <li v-for="user in users" :key="user.id" :class="style['user-item']">
-        <router-link :to="'/user/' + user.id" :class="style['user-link']">{{ user.name }}</router-link>
+    <ul class="userList">
+      <li v-for="user in users" :key="user.id" class="userList_userItem">
+        <router-link :to="'/user/' + user.id" class="userList_userItem_userLink">{{ user.name }}</router-link>
       </li>
     </ul>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+import { ref, onMounted } from 'vue'
 import axios from '@/axios'
-import { defineComponent } from 'vue'
 import { User } from '@/types'
-import style from '@/styles/users.module.scss'
 
-export default defineComponent({
-  data (): { users: User[] } {
-    return {
-      users: []
-    }
-  },
-  computed: {
-    style () {
-      return style
-    }
-  },
-  async mounted () {
-    const response = await axios.get('/users')
-    this.users = response.data
-  }
+const users = ref<User[]>([])
+
+onMounted(async () => {
+  const response = await axios.get('/users')
+  users.value = response.data
 })
 </script>
+
+<style lang="scss">
+.userList {
+  list-style: none;
+  padding: 0;
+
+  &_userItem {
+    margin: 10px 0;
+
+    &_userLink {
+      text-decoration: none;
+      color: #42b983;
+    }
+  }
+}
+</style>
